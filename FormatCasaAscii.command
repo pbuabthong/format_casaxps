@@ -3,6 +3,7 @@
 import os, ntpath, re, time
 from shutil import copyfile
 from pathlib import Path
+
 import tkinter as tk
 from tkinter import messagebox, filedialog, constants
 
@@ -15,8 +16,12 @@ class FormatCasaAscii(tk.Frame):
 	def alertbox(self, msg):
 		messagebox.showinfo("Error", msg)
 
-	def format_ascii(self):
-		self.alertbox("format!")
+	def format_ascii(self, asciifile):
+		faw = tk.Toplevel(self) # format ascii window
+		sidewindow(self.root, t)
+		faw.wm_title("new window")
+		l = faw.Label(t, text="test")
+		l.pack(side="top", fill="both", expand=True)
 
 	def create_newfiles(self):
 		for i in range(len(self.labels)):
@@ -66,6 +71,7 @@ class FormatCasaAscii(tk.Frame):
 			counter += 1
 		self.rename_btn = tk.Button(self, text='Create files', command=self.create_newfiles)
 		self.rename_btn.grid(row=counter+2, column=1, columnspan=2, sticky="WE")
+		self.rename_btn.focus_set()
 
 	def load_vamas_ascii(self):
 		descfilename = "/Users/pakpoomb/Documents/Caltech/Lewis Group/XPS/Nb/Nb.TXT"
@@ -99,9 +105,10 @@ class FormatCasaAscii(tk.Frame):
 
 	def __init__(self, root):
 		tk.Frame.__init__(self,root)
-		self.grid()
+		self.root = root
+		self.grid(sticky=tk.N+tk.S+tk.E+tk.W)
+		#self.grid()
 		button_opt = {'padx': 5, 'pady': 5}
-		#tk.Button(self, text='Open description file', command=self.askopenfile).pack(**button_opt)
 		tk.Button(self, text='Open description file', command=self.load_vamas_ascii).grid(row=1, column=1, columnspan=2)
 		
 		# define options for opening a file
@@ -121,6 +128,16 @@ def center(toplevel):
 	y = h/2 - size[1]/2
 	toplevel.geometry("%dx%d+%d+%d" % (size + (x, y)))
 
+def sidewindow(mainwin, sidewin):
+	sidewin.update_idletasks()
+	w = mainwin.winfo_width()
+	h = mainwin.winfo_height()
+	x = mainwin.winfo_x()
+	y = mainwin.winfo_y()
+	size = (w, h)
+	side_x = x + w
+	side_y = y
+	sidewin.geometry("%dx%d+%d+%d" % (size + (side_x, side_y)))
 if __name__=='__main__':
 	root = tk.Tk()
 	FormatCasaAscii(root)
