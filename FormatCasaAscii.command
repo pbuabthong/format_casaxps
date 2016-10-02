@@ -16,11 +16,11 @@ class FormatCasaAscii(tk.Frame):
 	def alertbox(self, msg):
 		messagebox.showinfo("Error", msg)
 
-	def format_ascii(self, asciifile):
+	def format_ascii(self):
 		faw = tk.Toplevel(self) # format ascii window
-		sidewindow(self.root, t)
+		createwindow(self.root, faw, 0)
 		faw.wm_title("new window")
-		l = faw.Label(t, text="test")
+		l = tk.Label(t, text="test")
 		l.pack(side="top", fill="both", expand=True)
 
 	def create_newfiles(self):
@@ -74,7 +74,7 @@ class FormatCasaAscii(tk.Frame):
 		self.rename_btn.focus_set()
 
 	def load_vamas_ascii(self):
-		descfilename = "/Users/pakpoomb/Documents/Caltech/Lewis Group/XPS/Nb/Nb.TXT"
+		descfilename = "/Users/pakpoomb/Documents/Caltech/LewisGroup/XPS/Nb/Nb.TXT"
 		self.descpath = ntpath.dirname(descfilename)
 		print(self.descpath)
 		with open(descfilename) as descfile:
@@ -128,16 +128,17 @@ def center(toplevel):
 	y = h/2 - size[1]/2
 	toplevel.geometry("%dx%d+%d+%d" % (size + (x, y)))
 
-def sidewindow(mainwin, sidewin):
+def createwindow(mainwin, sidewin, side):
 	sidewin.update_idletasks()
 	w = mainwin.winfo_width()
 	h = mainwin.winfo_height()
 	x = mainwin.winfo_x()
 	y = mainwin.winfo_y()
 	size = (w, h)
-	side_x = x + w
+	side_x = x + side * w
 	side_y = y
 	sidewin.geometry("%dx%d+%d+%d" % (size + (side_x, side_y)))
+
 if __name__=='__main__':
 	root = tk.Tk()
 	FormatCasaAscii(root)
