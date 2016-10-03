@@ -1,12 +1,10 @@
 import os
-# import asciitable
 import astropy.io.ascii as ac
-#from astropy.io import ascii
 
 import tkinter as tk
 from tkinter import messagebox, filedialog, constants, IntVar, StringVar
 
-class FormatAsciiTest(tk.Frame):
+class SortColumn(tk.Frame):
 
 	def __init__(self, root):
 		tk.Frame.__init__(self, root)
